@@ -1,0 +1,12 @@
+header {
+    background-color: rgb(223, 255, 255);
+}
+
+header ul {
+    display: flex;
+}
+
+header ul li {
+    list-style: none;
+    margin-right: 20px;
+}
