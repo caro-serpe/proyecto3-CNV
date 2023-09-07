@@ -1,16 +1,19 @@
-import Header from "../src/components/Header/Header";
-import Footer from "../src/components/Footer/Footer";
-import Home from "../src/components/Home/Home";
+import React from 'react';
+
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import Home from './screens/Home/Home';
 
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Home />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact={true} path="/" component={Home} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
 export default App;
+
