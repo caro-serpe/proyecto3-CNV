@@ -1,9 +1,12 @@
 footer {
-    background-color: rgb(166, 216, 255);
+    background-color: rgb(240, 246, 246);
 }
 
 footer ul {
     display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 footer ul li {
