@@ -4,7 +4,7 @@ import "./Home.css";
 
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-
+import Buscador from "../../components/Buscador/Buscador";
 import Card from "../../components/Card/Card";
 
 class Home extends Component {
@@ -40,7 +40,7 @@ class Home extends Component {
         return (
             <>
                 <Header />
-            
+                <Buscador />
                 <main>
                     <h2>Top canciones</h2>
                     <section>
