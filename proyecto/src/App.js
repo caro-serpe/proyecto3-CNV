@@ -11,6 +11,7 @@ import VerTodasAlbumes from './screens/VerTodasAlbumes/VerTodasAlbumes';
 // import Detalle from './screens/Detalle/Detalle';
 import DetallesAlbum from './screens/Detalles/DetallesAlbum';
 import DetallesCancion from './screens/Detalles/DetallesCancion';
+import NotFound from './screens/NotFound'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         {/* <Route exact path="/favoritos" component={Favoritos} /> */}
         <Route exact path="/detalle-album/:id" component={DetallesAlbum} />
         <Route exact path="/detalle-cancion/:id" component={DetallesCancion} />
+        <Route component={NotFound}/>
       </Switch>
     </BrowserRouter>
   );
