@@ -72,7 +72,7 @@ class Card extends Component {
 
     render() {
         return (
-            <div>
+            <div className="tarjetaCancion">
                 <img src={this.props.cancion_album_cover} alt={this.props.cancion_title} />
                 <h6>{this.props.cancion_title}</h6>
                 {

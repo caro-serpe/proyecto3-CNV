@@ -1,0 +1,14 @@
+.tarjetaCancion {
+    background-color: rgb(255, 133, 161);
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 15vw;
+    align-items: center;
+}
+
+button {
+   border: none;
+   background-color: rgb(255, 133, 161)
+}

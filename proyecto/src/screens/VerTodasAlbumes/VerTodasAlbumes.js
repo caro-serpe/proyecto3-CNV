@@ -70,8 +70,7 @@ class VerTodasAlbumes extends Component {
         return (
             <>
                 <Header />
-                <Buscador />
-                <form className="filtrar" onSubmit={(evento) => this.filtrarCanciones(evento)}>
+                <form className="section" onSubmit={(evento) => this.filtrarCanciones(evento)}>
                     <h6>Filtrar</h6>
                     <input onChange={(evento) => this.guardarFiltro(evento)} type="text" placeholder="Buscar..." value={this.state.stringFiltro} />
                     <button type="submit">Filtrar</button>
