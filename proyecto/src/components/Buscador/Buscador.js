@@ -19,6 +19,7 @@ class Buscador extends Component {
     envioFormulario(evento) {
         evento.preventDefault()
         console.log(this.state.search)
+        this.props.search(this.state.search);
     }
 
     render() {

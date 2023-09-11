@@ -9,64 +9,46 @@ class Card extends Component {
         super(props)
         this.state = {
             varMas : false,
-            arrayFavoritos : []
+            isFavorite: false
         }
     }
 
     componentDidMount() {
-        let stringFavoritos = localStorage.getItem("favoritos")
+        let stringFavoritos = localStorage.getItem("favoritos-" + this.props.type);
+        let arrayFavoritos = JSON.parse(stringFavoritos)
+
+        if (arrayFavoritos) {
+            this.setState({
+                isFavorite: arrayFavoritos.includes(this.props.id)
+            });
+        }
+    }
+
+    toggleFavorite() {
+        let stringFavoritos = localStorage.getItem("favoritos-" + this.props.type);
         let arrayFavoritos = JSON.parse(stringFavoritos)
 
         if (arrayFavoritos === null) {
-            arrayFavoritos = []
+            arrayFavoritos = [];
+        } 
+
+        if (this.state.isFavorite) {
+            arrayFavoritos = arrayFavoritos.filter(id => id !== this.props.id)
         } else {
-            this.setState({
-                arrayFavoritos: arrayFavoritos
-            })
+            arrayFavoritos.push(this.props.id);
         }
+
+        let nuevoStringFavoritos = JSON.stringify(arrayFavoritos);
+        localStorage.setItem("favoritos-" + this.props.type, nuevoStringFavoritos);
+
+        this.setState({
+            isFavorite: !this.state.isFavorite
+        });
     }
 
     cambiarEstado() {
         this.setState({
             verMas: !this.state.verMas
-        })
-    }
-
-    agregarFavorito(id) {
-        let stringFavoritos = localStorage.getItem("favoritos")
-        let arrayFavoritos = JSON.parse(stringFavoritos)
-
-        if (arrayFavoritos === null) {
-            arrayFavoritos = []
-        }
-
-        arrayFavoritos.push(id)
-
-        let nuevoStringFavoritos = JSON.stringify(arrayFavoritos)
-
-        localStorage.setItem("favoritos", nuevoStringFavoritos)
-
-        this.setState({
-            arrayFavoritos: arrayFavoritos
-        })
-    }
-
-    quitarFavorito(id) {
-        let stringFavoritos = localStorage.getItem("favoritos")
-        let arrayFavoritos = JSON.parse(stringFavoritos)
-
-        if (arrayFavoritos === null) {
-            arrayFavoritos = []
-        }
-
-        let arrayFavoritosFiltrado = arrayFavoritos.filter(favorito => favorito !== id)
-
-        let nuevoStringFavoritos = JSON.stringify(arrayFavoritosFiltrado)
-
-        localStorage.setItem("favoritos", nuevoStringFavoritos)
-
-        this.setState({
-            arrayFavoritos: arrayFavoritosFiltrado
         })
     }
 
@@ -90,12 +72,8 @@ class Card extends Component {
                     <button onClick={() => this.cambiarEstado()}>Ver menos</button> :
                     <button onClick={() => this.cambiarEstado()}>Ver más</button>
                 }
-                <button><Link to={"/detalle/" + this.props.id}>Ir al detalle</Link></button>
-                {
-                    this.state.arrayFavoritos.includes(this.props.id) ?
-                    <button onClick={() => this.quitarFavorito(this.props.id)}>Quitar de favoritos</button> :
-                    <button onClick={() => this.agregarFavorito(this.props.id)}>Agregar a favoritos</button>
-                }
+                <button><Link to={"/detalle-" + this.props.type + "/" + this.props.id}>Ir al detalle</Link></button>
+                <button onClick={() => this.toggleFavorite()}>{this.state.isFavorite ? "Quitar" : "Agregar"} a favoritos</button>
             </div>
         )
     }

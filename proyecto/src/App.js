@@ -9,6 +9,8 @@ import VerTodasAlbumes from './screens/VerTodasAlbumes/VerTodasAlbumes';
 
 // import Favoritos from './screens/Favoritos/Favoritos';
 // import Detalle from './screens/Detalle/Detalle';
+import DetallesAlbum from './screens/Detalles/DetallesAlbum';
+import DetallesCancion from './screens/Detalles/DetallesCancion';
 
 function App() {
   return (
@@ -18,8 +20,9 @@ function App() {
         <Route exact path="/favoritos" component={Favoritos} />
         <Route path="/ver-canciones" component={VerTodasCanciones} />
         <Route path="/ver-albumes" component={VerTodasAlbumes} />
-        {/* <Route exact path="/favoritos" component={Favoritos} />
-        <Route exact path="/detalle/:id" component={Detalle} /> */}
+        {/* <Route exact path="/favoritos" component={Favoritos} /> */}
+        <Route exact path="/detalle-album/:id" component={DetallesAlbum} />
+        <Route exact path="/detalle-cancion/:id" component={DetallesCancion} />
       </Switch>
     </BrowserRouter>
   );

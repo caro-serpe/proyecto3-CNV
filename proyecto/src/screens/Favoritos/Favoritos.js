@@ -15,6 +15,22 @@ class Favoritos extends Component {
         }
     }
 
+    componentDidMount() {
+        let cancionesFavoritas = JSON.parse(localStorage.getItem("favoritos-cancion")) ?? [];
+        let albumsFavoritos = JSON.parse(localStorage.getItem("favoritos-album")) ?? [];
+
+        /*
+        ** Aca estoy juntando AMBOS favoritos (canciones y albums) en un solo array
+        ** para poder mostrarlos en la vista (a futuro estaria bueno diferenciarlos
+        ** con un titulo o algo asi)
+        */
+        let arrayFavoritos = cancionesFavoritas.concat(albumsFavoritos);
+
+        this.setState({
+            arrayFavoritos : arrayFavoritos
+        })
+    }
+
     render() {
         return (
             <>
