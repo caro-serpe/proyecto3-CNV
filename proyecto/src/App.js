@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Home from './screens/Home/Home';
+import Favoritos from './screens/Favoritos/Favoritos';
 import VerTodasCanciones from './screens/VerTodasCanciones/VerTodasCanciones';
 import VerTodasAlbumes from './screens/VerTodasAlbumes/VerTodasAlbumes';
 
@@ -14,6 +15,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact={true} path="/" component={Home} />
+        <Route exact path="/favoritos" component={Favoritos} />
         <Route path="/ver-canciones" component={VerTodasCanciones} />
         <Route path="/ver-albumes" component={VerTodasAlbumes} />
         {/* <Route exact path="/favoritos" component={Favoritos} />
