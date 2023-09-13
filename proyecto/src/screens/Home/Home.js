@@ -5,7 +5,7 @@ import "./Home.css";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Buscador from "../../components/Buscador/Buscador";
-import Card from "../../components/Card/Card";
+import SectionHome from "../../components/SectionHome/SectionHome";
 
 class Home extends Component {
     constructor(props) {
@@ -63,17 +63,9 @@ class Home extends Component {
                 <Buscador search={this.search.bind(this)} />
                 <main>
                     <h2>Top canciones</h2>
-                    <section>
-                        {
-                            this.state.arrayCanciones.map((cancion, i) => <Card key={i} id={cancion.id} cancion_title={cancion.title} cancion_album_cover={cancion.album.cover} cancion_artist_name={cancion.artist.name} type={"cancion"}/>)
-                        }
-                    </section>
+                    <SectionHome arrayCanciones={this.state.arrayCanciones} />
                     <h2>Top álbumes</h2>
-                    <section>
-                        {
-                            this.state.arrayAlbumes.map((album, i) => <Card key={i} id={album.id} cancion_title={album.title} cancion_album_cover={album.cover} cancion_artist_name={album.artist.name} type={"album"}/>)
-                        }
-                    </section>
+                    <SectionHome arrayAlbumes={this.state.arrayAlbumes} />
                 </main>
                 <Footer />
             </>
