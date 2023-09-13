@@ -27,12 +27,10 @@ class DetallesAlbum extends Component {
   render() {
     return (
       <>
-      <Header />
       <Buscador />
         <h1>Detalles del Album</h1>
         <h2>{this.state.album.title}</h2>
         <img src={this.state.album.cover_medium} alt={this.state.album.title} />
-      <Footer />
       </>
     );
   }

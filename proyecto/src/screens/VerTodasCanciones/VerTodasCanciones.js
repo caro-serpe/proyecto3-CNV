@@ -66,7 +66,6 @@ class VerTodasCanciones extends Component {
     render() {
         return (
             <>
-                <Header />
                 <form className="filtrar" onSubmit={(evento) => this.filtrarCanciones(evento)}>
                     <h6>Filtrar</h6>
                     <input onChange={(evento) => this.guardarFiltro(evento)} type="text" placeholder="Buscar..." value={this.state.stringFiltro} />
@@ -92,7 +91,6 @@ class VerTodasCanciones extends Component {
                     </section>
                     <button onClick={() => this.cargarMasCanciones()}>Cargar más</button>
                 </main>
-                <Footer />
             </>
         )
     }

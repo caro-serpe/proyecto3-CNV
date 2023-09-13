@@ -82,7 +82,6 @@ class Favoritos extends Component {
     render() {
         return (
             <>
-                <Header />
                 <Buscador search={this.search.bind(this)} />
                 <main className="favoritos">
                     {
@@ -91,7 +90,6 @@ class Favoritos extends Component {
                         this.state.arrayFavoritos.map((item, index) => <Card key={index} id={item.id} cancion_album_cover={item.imagen} cancion_title={item.titulo} cancion_artist_name={item.artista} album={item.album} duracion={item.duracion} fecha={item.fecha} type={item.tipo} />)
                     }
                 </main>
-                <Footer />
             </>
         )
     }

@@ -27,13 +27,11 @@ class DetallesCancion extends Component {
   render() {
     return (
       <>
-      <Header />
       <Buscador />
         <h1>Detalles de la canción</h1>
         <h2>{this.state.track.title}</h2>
         <img src={this.state.track.album && this.state.track.album.cover_big} alt="Imagen de la canción" />
         <h2>{this.state.track.name}</h2>
-      <Footer />
       </>
     );
   }

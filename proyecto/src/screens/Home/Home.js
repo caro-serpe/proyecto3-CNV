@@ -59,7 +59,6 @@ class Home extends Component {
     render() {
         return (
             <>
-                <Header />
                 <Buscador search={this.search.bind(this)} />
                 <main>
                     <h2>Top canciones</h2>
@@ -67,7 +66,6 @@ class Home extends Component {
                     <h2>Top álbumes</h2>
                     <SectionHome arrayAlbumes={this.state.arrayAlbumes} />
                 </main>
-                <Footer />
             </>
         )
     }
