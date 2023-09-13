@@ -45,26 +45,23 @@ class VerTodasCanciones extends Component {
         })
     }
 
-    cargarMasCanciones() {
+    cargarMasCanciones = () => {
         fetch(`https://thingproxy.freeboard.io/fetch/https://api.deezer.com/chart/0/tracks?limit=${this.state.cantidadCanciones + 10}`)
             .then(res => res.json())
             .then(data => {
-
-                // Quiero agregar las últimas 10 canciones que me llegan a las que tenemos en arrayCanciones del estado
-
-                let arrayNuevasCanciones = []
-
-                for (let i = this.state.cantidadCanciones; i < this.state.cantidadCanciones + 10; i++) {
-                    arrayNuevasCanciones.push(data.data[i])
+                const arrayNuevasCanciones = data.data ? data.data.slice(this.state.cantidadCanciones, this.state.cantidadCanciones + 10) : [];
+    
+                this.setState(prevState => ({
+                    arrayCanciones: [...prevState.arrayCanciones, ...arrayNuevasCanciones],
+                    cantidadCanciones: prevState.cantidadCanciones + 10
+                }));
+    
+                if (!data.data || data.data.length === 0) {
+                    console.log("No hay más elementos para cargar.");
                 }
-
-                this.setState({
-                    arrayCanciones: this.state.arrayCanciones.concat(arrayNuevasCanciones),
-                    cantidadCanciones: this.state.cantidadCanciones + 10
-                })
             })
-            .catch(err => console.log(err))
-    }
+            .catch(err => console.log(err));
+    };
 
     render() {
         return (

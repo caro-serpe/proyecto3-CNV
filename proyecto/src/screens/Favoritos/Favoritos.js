@@ -67,14 +67,23 @@ class Favoritos extends Component {
                 })
                 .catch(err => console.log(err))
         })
-
+    }
+    search(term) {
+        fetch("https://thingproxy.freeboard.io/fetch/https://api.deezer.com/search?q=track:" + term + "&limit=5")
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    arrayFavoritos: data.data
+                });
+            })
+            .catch(err => console.log(err));
     }
 
     render() {
         return (
             <>
                 <Header />
-                <Buscador />
+                <Buscador search={this.search.bind(this)} />
                 <main className="favoritos">
                     {
                         this.state.arrayFavoritos.length === 0 ?
