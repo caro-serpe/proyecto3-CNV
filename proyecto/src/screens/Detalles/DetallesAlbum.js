@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 
+import Header from "../../components/Header/Header";
+import Buscador from "../../components/Buscador/Buscador";
+import Footer from "../../components/Footer/Footer";
+
+import "./Detalle.css";
+
 class DetallesAlbum extends Component {
   constructor(props) {
     super(props);
@@ -20,11 +26,14 @@ class DetallesAlbum extends Component {
 
   render() {
     return (
-      <div>
+      <>
+      <Header />
+      <Buscador />
         <h1>Detalles del Album</h1>
         <h2>{this.state.album.title}</h2>
         <img src={this.state.album.cover_medium} alt={this.state.album.title} />
-      </div>
+      <Footer />
+      </>
     );
   }
 }

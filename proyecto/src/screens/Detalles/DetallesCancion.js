@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 
+import Header from "../../components/Header/Header";
+import Buscador from "../../components/Buscador/Buscador";
+import Footer from "../../components/Footer/Footer";
+
+
+import "./Detalle.css";
+
 class DetallesCancion extends Component {
   constructor(props) {
     super(props);
@@ -19,12 +26,15 @@ class DetallesCancion extends Component {
 
   render() {
     return (
-      <div>
+      <>
+      <Header />
+      <Buscador />
         <h1>Detalles de la canción</h1>
         <h2>{this.state.track.title}</h2>
         <img src={this.state.track.album && this.state.track.album.cover_big} alt="Imagen de la canción" />
         <h2>{this.state.track.name}</h2>
-      </div>
+      <Footer />
+      </>
     );
   }
 }
