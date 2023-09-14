@@ -77,9 +77,14 @@ class VerTodasCanciones extends Component {
                         {
                             this.state.arrayCancionesFiltradas.length > 0 ?
                             <>
-                                {
+                            <section className="tarjetaCancion">
+                            {
                                     this.state.arrayCancionesFiltradas.map((cancion, i) => <Card key={i} id={cancion.id} cancion_title={cancion.title} cancion_album_cover={cancion.album.cover} cancion_artist_name={cancion.artist.name} />)
                                 }
+                            </section>
+
+                               
+
                             </> : 
                             <>
                                 {
