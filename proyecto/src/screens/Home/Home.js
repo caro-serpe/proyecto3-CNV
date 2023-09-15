@@ -2,8 +2,7 @@ import React, { Component } from "react";
 
 import "./Home.css";
 
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
+
 import Buscador from "../../components/Buscador/Buscador";
 import SectionHome from "../../components/SectionHome/SectionHome";
 import Loader from "../../components/Loader/Loader";

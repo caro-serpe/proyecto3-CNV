@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
-import Header from "../../components/Header/Header";
 import Buscador from "../../components/Buscador/Buscador";
-import Footer from "../../components/Footer/Footer";
 import Card from "../../components/Card/Card";
 import Loader from "../../components/Loader/Loader";
 
