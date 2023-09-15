@@ -32,6 +32,7 @@ class Card extends Component {
             arrayFavoritos = [];
         } 
 
+        // si estaba en favoritos, lo saco
         if (this.state.isFavorite) {
             arrayFavoritos = arrayFavoritos.filter(id => id !== this.props.id)
         } else {
@@ -67,11 +68,7 @@ class Card extends Component {
                     </> :
                     null
                 }
-                {
-                    this.state.verMas ?
-                    <button onClick={() => this.cambiarEstado()}>Ver menos</button> :
-                    <button onClick={() => this.cambiarEstado()}>Ver más</button>
-                }
+                <button onClick={() => this.cambiarEstado()}>Ver {this.state.verMas ? "menos" : "más"}</button>
                 <button><Link to={"/detalle-" + this.props.type + "/" + this.props.id}>Ir al detalle</Link></button>
                 <button onClick={() => this.toggleFavorite()}>{this.state.isFavorite ? "Quitar" : "Agregar"} a favoritos</button>
             </div>

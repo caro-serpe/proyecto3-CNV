@@ -13,12 +13,12 @@ class Buscador extends Component {
     guardarEstadoBusqueda(evento) {
         this.setState({
             search: evento.target.value
-        })
+        });
+        this.props?.setSearchTerm(evento.target.value);
     }
 
     envioFormulario(evento) {
         evento.preventDefault()
-        console.log(this.state.search)
         this.props.search(this.state.search);
     }
 
