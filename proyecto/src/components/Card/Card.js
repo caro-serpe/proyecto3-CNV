@@ -27,13 +27,13 @@ class Card extends Component {
     toggleFavorite() {
         let stringFavoritos = localStorage.getItem("favoritos-" + this.props.type);
         let arrayFavoritos = JSON.parse(stringFavoritos)
-
         if (arrayFavoritos === null) {
             arrayFavoritos = [];
         } 
 
         // si estaba en favoritos, lo saco
         if (this.state.isFavorite) {
+            console.log(this.props.id)
             arrayFavoritos = arrayFavoritos.filter(id => id !== this.props.id)
         } else {
             arrayFavoritos.push(this.props.id);

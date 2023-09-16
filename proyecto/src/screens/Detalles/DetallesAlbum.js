@@ -9,7 +9,8 @@ class DetallesAlbum extends Component {
     super(props);
 
     this.state = {
-      album: null
+      album: null,
+      isFavorite: false
     };
 
   }
@@ -23,55 +24,39 @@ class DetallesAlbum extends Component {
         this.setState({ album })
       })
       .catch(error => console.log(error));
-      let favsStringAlbum = localStorage.getItem("cancion")
-      let favsArrayAlbum = JSON.parse(favsStringAlbum)
-      if (favsArrayAlbum === null) {
-        favsArrayAlbum = []
-    } else {
-        if (favsArrayAlbum.includes(parseInt(this.props.match.params.id))) {
-            this.setState({
-                favorito: true
-            })
-        }
-        this.setState({
-            favsAlbum: favsArrayAlbum
-        })
+
+    let stringFavoritos = localStorage.getItem("favoritos-album");
+    let arrayFavoritos = JSON.parse(stringFavoritos)
+
+    if (arrayFavoritos) {
+      this.setState({
+        isFavorite: arrayFavoritos.includes(parseInt(id))
+      });
     }
   }
-  agregarFav(id) {
-    let favsString = localStorage.getItem(this.props.tipo)
-    let favsArray = JSON.parse(favsString)
-    if (favsArray === null) {
-        favsArray = [id]
-        let favsStringNuevo = JSON.stringify(favsArray)
-        localStorage.setItem(this.props.tipo, favsStringNuevo)
-    } else {
-        favsArray.push(id)
-        let favsStringNuevo = JSON.stringify(favsArray)
-        localStorage.setItem(this.props.tipo, favsStringNuevo)
-    }
-    this.setState({
-        favorito: true
-    })
-}
 
-quitarFav(id) {
-    let favsString = localStorage.getItem(this.props.tipo)
-    let favsArray = JSON.parse(favsString)
+  toggleFavorite() {
+    let stringFavoritos = localStorage.getItem("favoritos-album");
+    let arrayFavoritos = JSON.parse(stringFavoritos)
 
-    if (favsArray === null) {
-        favsArray = []
-        let favsStringNuevo = JSON.stringify(favsArray)
-        localStorage.setItem(this.props.tipo, favsStringNuevo)
-    } else {
-        let favsFiltrado = favsArray.filter((elm) => id !== elm)
-        let favsStringNuevo = JSON.stringify(favsFiltrado)
-        localStorage.setItem(this.props.tipo, favsStringNuevo)
+    if (arrayFavoritos === null) {
+      arrayFavoritos = [];
     }
+
+    // si estaba en favoritos, lo saco
+    if (this.state.isFavorite) {
+      arrayFavoritos = arrayFavoritos.filter(id => id !== parseInt(this.props.match.params.id))
+    } else {
+      arrayFavoritos.push(parseInt(this.props.match.params.id));
+    }
+
+    let nuevoStringFavoritos = JSON.stringify(arrayFavoritos);
+    localStorage.setItem("favoritos-album", nuevoStringFavoritos);
+
     this.setState({
-        favorito: false
-    })
-}
+      isFavorite: !this.state.isFavorite
+    });
+  }
 
   render() {
     return (
@@ -87,18 +72,14 @@ quitarFav(id) {
           )
         }
         <p>Canciones del album:</p>
-        {/* { */}
-          {/* this.state.album.tracklist.data.map((cancion, i) => ( */}
-            {/* <div key={cancion + i}> */}
-                {/* <ul ><li >{cancion.title}</li></ul> */}
-             {/* </div>  */}
-            {/* ))  */}
-        {/* 2}  */}
         {
-          this.state.favorito ?
-            <button onClick={() => this.quitarFav(this.props.id, "album")}>Quitar de favoritos</button> :
-            <button onClick={() => this.agregarFav(this.props.id, "album")}>Agregar a favoritos</button>
+          this.state.album === null ? <Loader /> : this.state.album.tracks.data.map((cancion, i) => (
+            <div key={cancion + i}>
+              <a href={"/detalle-cancion/" + cancion.id}><ul><li >{cancion.title}</li></ul></a>
+            </div>
+          ))
         }
+        <button onClick={() => this.toggleFavorite()}>{this.state.isFavorite ? "Quitar" : "Agregar"} a favoritos</button>
       </>
     );
   }

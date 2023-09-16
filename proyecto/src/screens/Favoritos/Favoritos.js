@@ -4,6 +4,7 @@ import Header from "../../components/Header/Header";
 import Buscador from "../../components/Buscador/Buscador";
 import Footer from "../../components/Footer/Footer";
 import Card from "../../components/Card/Card";
+import Loader from "../../components/Loader/Loader";
 
 import "./Favoritos.css";
 
@@ -11,7 +12,9 @@ class Favoritos extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            arrayFavoritos : []
+            arrayFavoritos : [],
+            loadingAlbums: true,
+            loadingCanciones: true
         }
     }
 
@@ -39,7 +42,8 @@ class Favoritos extends Component {
                     arrayFavoritos.push(objCancion)
 
                     this.setState({
-                        arrayFavoritos: arrayFavoritos
+                        arrayFavoritos: arrayFavoritos,
+                        loadingCanciones: false
                     })
                 })
                 .catch(err => console.log(err))
@@ -62,31 +66,45 @@ class Favoritos extends Component {
                     arrayFavoritos.push(objAlbum)
 
                     this.setState({
-                        arrayFavoritos: arrayFavoritos
+                        arrayFavoritos: arrayFavoritos,
+                        loadingAlbums: false
                     })
                 })
                 .catch(err => console.log(err))
         })
+
+        // si no hay favoritos, apaga el loader
+        if (cancionesFavoritas.length === 0) {
+            this.setState({
+                loadingCanciones: false
+            })
+        }
+
+        if (albumsFavoritos.length === 0) {
+            this.setState({
+                loadingAlbums: false
+            })
+        }
     }
     search(term) {
-        fetch("https://thingproxy.freeboard.io/fetch/https://api.deezer.com/search?q=track:" + term + "&limit=5")
-            .then(res => res.json())
-            .then(data => {
-                this.setState({
-                    arrayFavoritos: data.data
-                });
-            })
-            .catch(err => console.log(err));
+        // busca en el array de favoritos
+        let arrayFavoritos = this.state.arrayFavoritos.filter((item) => {
+            return item.titulo.toLowerCase().includes(term.toLowerCase())
+        })
+
+        this.setState({
+            arrayFavoritos: arrayFavoritos
+        })
     }
 
     render() {
         return (
             <>
-                <Buscador search={this.search.bind(this)} />
+                <Buscador search={(term) => this.search(term)} />
                 <main className="favoritos">
                     {
-                        this.state.arrayFavoritos.length === 0 ?
-                        <p>Cargando...</p> :
+                        this.state.loadingAlbums || this.state.loadingCanciones ?
+                        <Loader /> :
                         this.state.arrayFavoritos.map((item, index) => <Card key={index} id={item.id} cancion_album_cover={item.imagen} cancion_title={item.titulo} cancion_artist_name={item.artista} album={item.album} duracion={item.duracion} fecha={item.fecha} type={item.tipo} className="card"/>)
                     }
                 </main>

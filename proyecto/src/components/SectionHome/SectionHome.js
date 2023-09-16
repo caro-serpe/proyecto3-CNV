@@ -21,7 +21,7 @@ class SectionHome extends Component {
 		            </> :
 					<>
 		                {
-		                    this.props.arrayAlbumes.map((album, i) => <Card key={i} id={album.id} cancion_title={album.title} cancion_album_cover={album.cover} cancion_artist_name={album.artist.name} type={"album"}/>)
+		                    this.props.arrayAlbumes.map((album, i) => <Card key={i} id={album.id} cancion_title={album.title} cancion_album_cover={album.cover ? album.cover : album.album.cover} cancion_artist_name={album.artist.name} type={"album"}/>)
 		                }
 		            </>
 			            

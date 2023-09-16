@@ -14,7 +14,7 @@ class Buscador extends Component {
         this.setState({
             search: evento.target.value
         });
-        this.props?.setSearchTerm(evento.target.value);
+        this.props?.setSearchTerm?.(evento.target.value);
     }
 
     envioFormulario(evento) {
